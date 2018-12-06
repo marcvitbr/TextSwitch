@@ -76,6 +76,18 @@ public class UITextSwitch: UIControl {
         }
     }
 
+    public var textColorWhenOn: UIColor? {
+        didSet {
+            self.label.textColor = self.textColorWhenOn
+        }
+    }
+
+    public var textColorWhenOff: UIColor? {
+        didSet {
+            self.label.textColor = self.textColorWhenOff
+        }
+    }
+
     private var thumbView: UIView!
     private var trailView: UIView!
     private var label: UILabel!
@@ -126,6 +138,9 @@ public class UITextSwitch: UIControl {
         self.label.frame = CGRect(origin: CGPoint(x: self.obtainXForLabel(basedOnWidth: labelSize.width),
                                                   y: self.bounds.height / 2 - labelSize.height / 2),
                                   size: labelSize)
+
+        self.label.textColor = self.textColorWhenOn
+        self.label.textColor = self.textColorWhenOff
     }
 
     public override func beginTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
@@ -199,18 +214,15 @@ public class UITextSwitch: UIControl {
         }
 
         let thumbPositionX = self.obtainXForThumbView(basedOnWidth: self.thumbView.frame.width)
+        let labelPositionX = self.obtainXForLabel(basedOnWidth: self.label.frame.width)
 
         let trailBackgroundColor = self.obtainTrailBackgroundColor()
-
         let trailBorderColor = self.obtainTrailBorderColor()
-
-        let textColor = self.isOn ? UIColor.white : UIColor.lightGray
+        let textColor = self.obtainTextColor()
 
         let onText = self.textWhenOn ?? UITextSwitch.defaultOnText
         let offText = self.textWhenOff ?? UITextSwitch.defaultOffText
         let text = self.isOn ? onText : offText
-
-        let labelPositionX = self.obtainXForLabel(basedOnWidth: self.label.frame.width)
 
         let stateChangeActions = {
             self.thumbView.frame.origin.x = thumbPositionX
@@ -251,6 +263,14 @@ public class UITextSwitch: UIControl {
         let colorWhenOn = self.trailColorWhenOn?.cgColor ?? UIColor.green.cgColor
 
         let colorWhenOff = self.trailColorWhenOff?.cgColor ?? UIColor.white.cgColor
+
+        return self.isOn ? colorWhenOn : colorWhenOff
+    }
+
+    private func obtainTextColor() -> UIColor {
+        let colorWhenOn = self.textColorWhenOn ?? UIColor.white
+
+        let colorWhenOff = self.textColorWhenOff ?? UIColor.lightGray
 
         return self.isOn ? colorWhenOn : colorWhenOff
     }
