@@ -11,10 +11,8 @@ public protocol UITextSwitchSwitchListener: AnyObject {
 }
 
 public class UITextSwitch: UIControl {
-    private static let controlWidth: CGFloat = 120
-    private static let controlHeight: CGFloat = 35
-    private static let thumbWidth: CGFloat = 30
-    private static let thumbHeight: CGFloat = 30
+    private static let defaultControlWidth: CGFloat = 120
+    private static let defaultControlHeight: CGFloat = 35
     private static let margin: CGFloat = 2
     private static let fontSize: CGFloat = 12
 
@@ -92,13 +90,13 @@ public class UITextSwitch: UIControl {
     private var trailView: UIView!
     private var label: UILabel!
 
-    required init?(coder aDecoder: NSCoder) {
+    public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
 
         self.initialize()
     }
 
-    override init(frame: CGRect) {
+    public override init(frame: CGRect) {
         super.init(frame: frame)
 
         self.initialize()
@@ -106,8 +104,8 @@ public class UITextSwitch: UIControl {
 
     public convenience init() {
         self.init(frame: CGRect(origin: CGPoint.zero,
-                                size: CGSize(width: UITextSwitch.controlWidth,
-                                             height: UITextSwitch.controlHeight)))
+                                size: CGSize(width: UITextSwitch.defaultControlWidth,
+                                             height: UITextSwitch.defaultControlHeight)))
     }
 
     public override func layoutSubviews() {
@@ -117,30 +115,21 @@ public class UITextSwitch: UIControl {
             return
         }
 
-        let thumbSize = CGSize(width: UITextSwitch.thumbWidth,
-                               height: UITextSwitch.thumbHeight)
-
-        let thumbPosition = CGPoint(x: self.obtainXForThumbView(basedOnWidth: thumbSize.width),
-                                    y: self.bounds.height / 2 - thumbSize.height / 2)
+        let thumbSize = self.obtainThumbSize()
+        let thumbPosition = self.obtainThumbPosition(for: thumbSize)
+        let trailSize = self.obtainTrailSize()
+        let trailPosition = self.obtainTrailPosition(for: trailSize)
+        let labelSize = self.obtainLabelSizeBasedOn(trailSize, thumbSize)
 
         self.thumbView.frame = CGRect(origin: thumbPosition, size: thumbSize)
-
-        let trailSize = CGSize(width: UITextSwitch.controlWidth,
-                               height: UITextSwitch.controlHeight)
-
-        let trailPosition = CGPoint(x: self.bounds.width - trailSize.width, y: 0)
+        self.thumbView.layer.cornerRadius = thumbSize.height / 2
 
         self.trailView.frame = CGRect(origin: trailPosition, size: trailSize)
-
-        let labelSize = CGSize(width: trailSize.width - thumbSize.width,
-                               height: trailSize.height)
+        self.trailView.layer.cornerRadius = trailSize.height / 2
 
         self.label.frame = CGRect(origin: CGPoint(x: self.obtainXForLabel(basedOnWidth: labelSize.width),
                                                   y: self.bounds.height / 2 - labelSize.height / 2),
                                   size: labelSize)
-
-        self.label.textColor = self.textColorWhenOn
-        self.label.textColor = self.textColorWhenOff
     }
 
     public override func beginTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
@@ -243,6 +232,15 @@ public class UITextSwitch: UIControl {
         UIView.animate(withDuration: 0.2, animations: stateChangeActions)
     }
 
+    private func obtainThumbPosition(for thumbSize: CGSize) -> CGPoint {
+        return CGPoint(x: self.obtainXForThumbView(basedOnWidth: thumbSize.width),
+                       y: self.bounds.height / 2 - thumbSize.height / 2)
+    }
+
+    private func obtainTrailPosition(for trailSize: CGSize) -> CGPoint {
+        return CGPoint(x: self.bounds.width - trailSize.width, y: 0)
+    }
+
     private func obtainXForThumbView(basedOnWidth thumbViewWidth: CGFloat) -> CGFloat {
         return self.isOn ? self.bounds.width - thumbViewWidth - 2 : UITextSwitch.margin
     }
@@ -273,5 +271,20 @@ public class UITextSwitch: UIControl {
         let colorWhenOff = self.textColorWhenOff ?? UIColor.lightGray
 
         return self.isOn ? colorWhenOn : colorWhenOff
+    }
+
+    private func obtainTrailSize() -> CGSize {
+        return CGSize(width: self.bounds.width,
+                      height: self.bounds.height)
+    }
+
+    private func obtainThumbSize() -> CGSize {
+        return CGSize(width: self.bounds.height,
+                      height: self.bounds.height)
+    }
+
+    private func obtainLabelSizeBasedOn(_ trailSize: CGSize, _ thumbSize: CGSize) -> CGSize {
+        return CGSize(width: trailSize.width - thumbSize.width,
+                      height: trailSize.height)
     }
 }
