@@ -23,6 +23,8 @@ class ViewController: UIViewController {
         self.textSwitch.trailColorWhenOff = colorWhenOff
         self.textSwitch.textWhenOn = "Do it!"
         self.textSwitch.textWhenOff = "Don't do it!"
+        self.textSwitch.textColorWhenOn = UIColor.white
+        self.textSwitch.textColorWhenOff = UIColor.white
 
         self.view.addSubview(self.textSwitch)
     }
