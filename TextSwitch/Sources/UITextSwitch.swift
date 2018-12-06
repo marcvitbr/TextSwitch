@@ -21,16 +21,17 @@ public class UITextSwitch: UIControl {
     private static let defaultOnText = "On"
     private static let defaultOffText = "Off"
 
+    private var initialized = false
     private var hasTouched = false
 
     public weak var listener: UITextSwitchSwitchListener? {
         didSet {
-            self.listener?.changedState(to: self.on,
+            self.listener?.changedState(to: self.isOn,
                                         byTouch: self.hasTouched)
         }
     }
 
-    public var on = false {
+    public var isOn = false {
         didSet {
             self.changeState(animated: self.hasTouched)
             self.hasTouched = false
@@ -41,7 +42,7 @@ public class UITextSwitch: UIControl {
         didSet {
             self.layoutSubviews()
 
-            if self.on {
+            if self.isOn {
                 self.label.text = self.textWhenOn
             }
         }
@@ -51,17 +52,33 @@ public class UITextSwitch: UIControl {
         didSet {
             self.layoutSubviews()
 
-            if !self.on {
+            if !self.isOn {
                 self.label.text = self.textWhenOff
             }
+        }
+    }
+
+    public var trailColorWhenOn: UIColor? {
+        didSet {
+            self.trailView.backgroundColor = self.trailColorWhenOn
+        }
+    }
+
+    public var trailColorWhenOff: UIColor? {
+        didSet {
+            self.trailView.backgroundColor = self.trailColorWhenOff
+        }
+    }
+
+    public var thumbColor: UIColor? {
+        didSet {
+            self.thumbView.backgroundColor = self.thumbColor
         }
     }
 
     private var thumbView: UIView!
     private var trailView: UIView!
     private var label: UILabel!
-
-    private var initialized = false
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -116,7 +133,7 @@ public class UITextSwitch: UIControl {
 
         self.hasTouched = true
 
-        self.on = !self.on
+        self.isOn = !self.isOn
 
         return true
     }
@@ -177,21 +194,21 @@ public class UITextSwitch: UIControl {
 
     private func changeState(animated: Bool) {
         defer {
-            self.listener?.changedState(to: self.on,
+            self.listener?.changedState(to: self.isOn,
                                         byTouch: self.hasTouched)
         }
 
         let thumbPositionX = self.obtainXForThumbView(basedOnWidth: self.thumbView.frame.width)
 
-        let trailBackgroundColor = self.on ? UIColor.green : UIColor.white
+        let trailBackgroundColor = self.obtainTrailBackgroundColor()
 
-        let trailBorderColor = self.on ? UIColor.green.cgColor : UIColor.lightGray.cgColor
+        let trailBorderColor = self.obtainTrailBorderColor()
 
-        let textColor = self.on ? UIColor.white : UIColor.lightGray
+        let textColor = self.isOn ? UIColor.white : UIColor.lightGray
 
         let onText = self.textWhenOn ?? UITextSwitch.defaultOnText
         let offText = self.textWhenOff ?? UITextSwitch.defaultOffText
-        let text = self.on ? onText : offText
+        let text = self.isOn ? onText : offText
 
         let labelPositionX = self.obtainXForLabel(basedOnWidth: self.label.frame.width)
 
@@ -215,10 +232,26 @@ public class UITextSwitch: UIControl {
     }
 
     private func obtainXForThumbView(basedOnWidth thumbViewWidth: CGFloat) -> CGFloat {
-        return self.on ? self.bounds.width - thumbViewWidth - 2 : UITextSwitch.margin
+        return self.isOn ? self.bounds.width - thumbViewWidth - 2 : UITextSwitch.margin
     }
 
     private func obtainXForLabel(basedOnWidth labelWidth: CGFloat) -> CGFloat {
-        return self.on ? UITextSwitch.margin : self.bounds.width - labelWidth - UITextSwitch.margin
+        return self.isOn ? UITextSwitch.margin : self.bounds.width - labelWidth - UITextSwitch.margin
+    }
+
+    private func obtainTrailBackgroundColor() -> UIColor {
+        let colorWhenOn = self.trailColorWhenOn ?? UIColor.green
+
+        let colorWhenOff = self.trailColorWhenOff ?? UIColor.white
+
+        return self.isOn ? colorWhenOn : colorWhenOff
+    }
+
+    private func obtainTrailBorderColor() -> CGColor {
+        let colorWhenOn = self.trailColorWhenOn?.cgColor ?? UIColor.green.cgColor
+
+        let colorWhenOff = self.trailColorWhenOff?.cgColor ?? UIColor.white.cgColor
+
+        return self.isOn ? colorWhenOn : colorWhenOff
     }
 }
