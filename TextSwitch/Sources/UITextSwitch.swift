@@ -1,16 +1,16 @@
 //
-//  TextSwitch.swift
-//  TextSwitch
+//  UITextSwitch.swift
+//  UITextSwitch
 //
 //  Created by Marcelo Vitoria on 06/12/18.
 //  Copyright © 2018 Marcelo Vitoria. All rights reserved.
 //
 
-protocol TextSwitchSwitchListener: AnyObject {
+public protocol UITextSwitchSwitchListener: AnyObject {
     func changedState(to newState: Bool, byTouch: Bool)
 }
 
-class TextSwitch: UIControl {
+public class UITextSwitch: UIControl {
     private static let controlWidth: CGFloat = 120
     private static let controlHeight: CGFloat = 35
     private static let thumbWidth: CGFloat = 30
@@ -21,21 +21,23 @@ class TextSwitch: UIControl {
     private static let defaultOnText = "On"
     private static let defaultOffText = "Off"
 
-    weak var listener: TextSwitchSwitchListener? {
+    private var hasTouched = false
+
+    public weak var listener: UITextSwitchSwitchListener? {
         didSet {
             self.listener?.changedState(to: self.on,
                                         byTouch: self.hasTouched)
         }
     }
 
-    var on = false {
+    public var on = false {
         didSet {
             self.changeState(animated: self.hasTouched)
             self.hasTouched = false
         }
     }
 
-    var textWhenOn: String? {
+    public var textWhenOn: String? {
         didSet {
             self.layoutSubviews()
 
@@ -45,7 +47,7 @@ class TextSwitch: UIControl {
         }
     }
 
-    var textWhenOff: String? {
+    public var textWhenOff: String? {
         didSet {
             self.layoutSubviews()
 
@@ -73,29 +75,29 @@ class TextSwitch: UIControl {
         self.initialize()
     }
 
-    convenience init() {
+    public convenience init() {
         self.init(frame: CGRect(origin: CGPoint.zero,
-                                size: CGSize(width: TextSwitch.controlWidth,
-                                             height: TextSwitch.controlHeight)))
+                                size: CGSize(width: UITextSwitch.controlWidth,
+                                             height: UITextSwitch.controlHeight)))
     }
 
-    override func layoutSubviews() {
+    public override func layoutSubviews() {
         super.layoutSubviews()
 
         if !self.initialized {
             return
         }
 
-        let thumbSize = CGSize(width: TextSwitch.thumbWidth,
-                               height: TextSwitch.thumbHeight)
+        let thumbSize = CGSize(width: UITextSwitch.thumbWidth,
+                               height: UITextSwitch.thumbHeight)
 
         let thumbPosition = CGPoint(x: self.obtainXForThumbView(basedOnWidth: thumbSize.width),
                                     y: self.bounds.height / 2 - thumbSize.height / 2)
 
         self.thumbView.frame = CGRect(origin: thumbPosition, size: thumbSize)
 
-        let trailSize = CGSize(width: TextSwitch.controlWidth,
-                               height: TextSwitch.controlHeight)
+        let trailSize = CGSize(width: UITextSwitch.controlWidth,
+                               height: UITextSwitch.controlHeight)
 
         let trailPosition = CGPoint(x: self.bounds.width - trailSize.width, y: 0)
 
@@ -109,9 +111,7 @@ class TextSwitch: UIControl {
                                   size: labelSize)
     }
 
-    private var hasTouched = false
-
-    override func beginTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
+    public override func beginTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
         super.beginTracking(touch, with: event)
 
         self.hasTouched = true
@@ -167,10 +167,10 @@ class TextSwitch: UIControl {
     private func createStateLabel() {
         self.label = UILabel(frame: CGRect.zero)
         self.label.isUserInteractionEnabled = false
-        self.label.font = UIFont.systemFont(ofSize: TextSwitch.fontSize)
+        self.label.font = UIFont.systemFont(ofSize: UITextSwitch.fontSize)
         self.label.textColor = UIColor.lightGray
         self.label.textAlignment = .center
-        self.label.text = self.textWhenOff ?? TextSwitch.defaultOffText
+        self.label.text = self.textWhenOff ?? UITextSwitch.defaultOffText
 
         self.addSubview(self.label)
     }
@@ -189,8 +189,8 @@ class TextSwitch: UIControl {
 
         let textColor = self.on ? UIColor.white : UIColor.lightGray
 
-        let onText = self.textWhenOn ?? TextSwitch.defaultOnText
-        let offText = self.textWhenOff ?? TextSwitch.defaultOffText
+        let onText = self.textWhenOn ?? UITextSwitch.defaultOnText
+        let offText = self.textWhenOff ?? UITextSwitch.defaultOffText
         let text = self.on ? onText : offText
 
         let labelPositionX = self.obtainXForLabel(basedOnWidth: self.label.frame.width)
@@ -215,10 +215,10 @@ class TextSwitch: UIControl {
     }
 
     private func obtainXForThumbView(basedOnWidth thumbViewWidth: CGFloat) -> CGFloat {
-        return self.on ? self.bounds.width - thumbViewWidth - 2 : TextSwitch.margin
+        return self.on ? self.bounds.width - thumbViewWidth - 2 : UITextSwitch.margin
     }
 
     private func obtainXForLabel(basedOnWidth labelWidth: CGFloat) -> CGFloat {
-        return self.on ? TextSwitch.margin : self.bounds.width - labelWidth - TextSwitch.margin
+        return self.on ? UITextSwitch.margin : self.bounds.width - labelWidth - UITextSwitch.margin
     }
 }

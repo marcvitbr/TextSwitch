@@ -8,14 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		CCEFB1E321B9545C008B126B /* TextSwitch.h in Headers */ = {isa = PBXBuildFile; fileRef = CCEFB1E121B9545C008B126B /* TextSwitch.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		CCEFB20821B958D3008B126B /* TextSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCEFB20721B958D3008B126B /* TextSwitch.swift */; };
+		CCEFB20821B958D3008B126B /* UITextSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCEFB20721B958D3008B126B /* UITextSwitch.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		CCEFB1DE21B9545C008B126B /* TextSwitch.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TextSwitch.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCEFB1E121B9545C008B126B /* TextSwitch.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TextSwitch.h; sourceTree = "<group>"; };
 		CCEFB1E221B9545C008B126B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		CCEFB20721B958D3008B126B /* TextSwitch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextSwitch.swift; sourceTree = "<group>"; };
+		CCEFB20721B958D3008B126B /* UITextSwitch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextSwitch.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -50,7 +50,7 @@
 			children = (
 				CCEFB1E121B9545C008B126B /* TextSwitch.h */,
 				CCEFB1E221B9545C008B126B /* Info.plist */,
-				CCEFB20721B958D3008B126B /* TextSwitch.swift */,
+				CCEFB20721B958D3008B126B /* UITextSwitch.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -134,7 +134,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CCEFB20821B958D3008B126B /* TextSwitch.swift in Sources */,
+				CCEFB20821B958D3008B126B /* UITextSwitch.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
