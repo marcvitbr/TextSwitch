@@ -8,12 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		CCEFB1E321B9545C008B126B /* TextSwitch.h in Headers */ = {isa = PBXBuildFile; fileRef = CCEFB1E121B9545C008B126B /* TextSwitch.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CCEFB20821B958D3008B126B /* TextSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCEFB20721B958D3008B126B /* TextSwitch.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		CCEFB1DE21B9545C008B126B /* TextSwitch.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TextSwitch.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CCEFB1E121B9545C008B126B /* TextSwitch.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TextSwitch.h; sourceTree = "<group>"; };
 		CCEFB1E221B9545C008B126B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CCEFB20721B958D3008B126B /* TextSwitch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextSwitch.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -48,6 +50,7 @@
 			children = (
 				CCEFB1E121B9545C008B126B /* TextSwitch.h */,
 				CCEFB1E221B9545C008B126B /* Info.plist */,
+				CCEFB20721B958D3008B126B /* TextSwitch.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -95,6 +98,7 @@
 				TargetAttributes = {
 					CCEFB1DD21B9545C008B126B = {
 						CreatedOnToolsVersion = 10.1;
+						LastSwiftMigration = 1010;
 					};
 				};
 			};
@@ -130,6 +134,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CCEFB20821B958D3008B126B /* TextSwitch.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -261,6 +266,7 @@
 		CCEFB1E721B9545C008B126B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
@@ -268,7 +274,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = TextSwitch/Info.plist;
+				INFOPLIST_FILE = Sources/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -278,6 +284,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.marcelovitoria.TextSwitch;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -286,6 +293,7 @@
 		CCEFB1E821B9545C008B126B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
@@ -293,7 +301,7 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = TextSwitch/Info.plist;
+				INFOPLIST_FILE = Sources/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
