@@ -12,7 +12,23 @@
 		CCEFB1FB21B954B2008B126B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CCEFB1F921B954B2008B126B /* Main.storyboard */; };
 		CCEFB1FD21B954B5008B126B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CCEFB1FC21B954B5008B126B /* Assets.xcassets */; };
 		CCEFB20021B954B5008B126B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CCEFB1FE21B954B5008B126B /* LaunchScreen.storyboard */; };
+		CCEFB21D21B95DDA008B126B /* TextSwitch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CCEFB21C21B95DDA008B126B /* TextSwitch.framework */; };
+		CCEFB21E21B95DDA008B126B /* TextSwitch.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CCEFB21C21B95DDA008B126B /* TextSwitch.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		CCEFB21A21B95DC7008B126B /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				CCEFB21E21B95DDA008B126B /* TextSwitch.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		CCEFB1F221B954B2008B126B /* TextSwitchSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TextSwitchSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -22,6 +38,7 @@
 		CCEFB1FC21B954B5008B126B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CCEFB1FF21B954B5008B126B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		CCEFB20121B954B5008B126B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CCEFB21C21B95DDA008B126B /* TextSwitch.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = TextSwitch.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,6 +46,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CCEFB21D21B95DDA008B126B /* TextSwitch.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -38,8 +56,10 @@
 		CCEFB1E921B954B2008B126B = {
 			isa = PBXGroup;
 			children = (
+				CCEFB21C21B95DDA008B126B /* TextSwitch.framework */,
 				CCEFB1F421B954B2008B126B /* Sources */,
 				CCEFB1F321B954B2008B126B /* Products */,
+				CCEFB20921B95AB0008B126B /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -64,6 +84,13 @@
 			path = Sources;
 			sourceTree = "<group>";
 		};
+		CCEFB20921B95AB0008B126B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -74,6 +101,7 @@
 				CCEFB1EE21B954B2008B126B /* Sources */,
 				CCEFB1EF21B954B2008B126B /* Frameworks */,
 				CCEFB1F021B954B2008B126B /* Resources */,
+				CCEFB21A21B95DC7008B126B /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -284,7 +312,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = HF4NVVGD52;
-				INFOPLIST_FILE = TextSwitchSample/Info.plist;
+				INFOPLIST_FILE = Sources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -302,7 +330,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = HF4NVVGD52;
-				INFOPLIST_FILE = TextSwitchSample/Info.plist;
+				INFOPLIST_FILE = Sources/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

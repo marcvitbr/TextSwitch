@@ -7,13 +7,23 @@
 //
 
 import UIKit
+import TextSwitch
 
 class ViewController: UIViewController {
+    var textSwitch: UITextSwitch!
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+
+        self.textSwitch = UITextSwitch()
+
+        self.view.addSubview(self.textSwitch)
     }
 
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
 
+        self.textSwitch.center = self.view.center
+    }
 }
 
